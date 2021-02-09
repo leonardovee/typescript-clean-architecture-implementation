@@ -2,7 +2,7 @@
   "name": "typescript-clean-architecture-implementation",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "jest --passWithNoTests",
     "test:staged": "jest --passWithNoTests",
