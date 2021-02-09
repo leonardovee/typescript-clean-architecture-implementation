@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/leonardovee/typescript-clean-architecture-implementation/issues"
   },
-  "homepage": "https://github.com/leonardovee/typescript-clean-architecture-implementation#readme"
+  "homepage": "https://github.com/leonardovee/typescript-clean-architecture-implementation#readme",
+  "devDependencies": {
+    "git-commit-msg-linter": "^3.0.0"
+  }
 }
