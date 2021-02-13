@@ -1,6 +1,4 @@
-import { rejects } from 'assert'
 import bcrypt from 'bcrypt'
-import { resolve } from 'path'
 import { BcryptAdapter } from './bcrypt-adapter'
 
 jest.mock('bcrypt', () => ({
