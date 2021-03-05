@@ -1,5 +1,4 @@
 import { Validation } from './validation'
-import { badRequest } from '../http-helper'
 import { InvalidParamError } from '../../errors'
 import { EmailValidator } from '../../protocols/email-validator'
 
@@ -15,7 +14,7 @@ export class EmailValidation implements Validation {
   validate (input: any): any {
     const isValid = this.emailValidator.isValid(input[this.fieldName])
     if (!isValid) {
-      return badRequest(new InvalidParamError(this.fieldName))
+      return new InvalidParamError(this.fieldName)
     }
   }
 }
