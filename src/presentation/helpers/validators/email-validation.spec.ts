@@ -1,4 +1,3 @@
-import { badRequest } from '../http-helper'
 import { InvalidParamError } from '../../errors'
 import { EmailValidation } from './email-validation'
 import { EmailValidator } from '../../protocols/email-validator'
@@ -31,7 +30,7 @@ describe('Email Validation', () => {
     const { sut, emailValidatorStub } = makeSut()
     jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false)
     const error = sut.validate({ email: 'valid_email@mail.com' })
-    expect(error).toEqual(badRequest(new InvalidParamError('email')))
+    expect(error).toEqual(new InvalidParamError('email'))
   })
 
   test('Should call EmailValidator with correct email', () => {
