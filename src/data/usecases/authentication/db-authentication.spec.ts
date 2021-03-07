@@ -20,10 +20,8 @@ describe('DbAuthentication UseCase', () => {
     const loadAccountByEmailRepositoryStub = new LoadAccountByEmailRepositoryStub()
     const sut = new DbAuthentication(loadAccountByEmailRepositoryStub)
     const loadSpy = jest.spyOn(loadAccountByEmailRepositoryStub, 'load')
-    await sut.auth({
-      email: 'any_email@mail.com',
-      password: 'any_password'
-    })
-    expect(loadSpy).toHaveBeenCalledWith('any_email@mail.com')
+    const { email, password } = makeFakeAccount()
+    await sut.auth({ email, password })
+    expect(loadSpy).toHaveBeenCalledWith(email)
   })
 })
