@@ -9,15 +9,19 @@ const makeFakeAccount = (): AccountModel => ({
   password: 'any_password'
 })
 
+const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
+  class LoadAccountByEmailRepositoryStub implements LoadAccountByEmailRepository {
+    async load (email: string): Promise<AccountModel> {
+      const account: AccountModel = makeFakeAccount()
+      return new Promise(resolve => resolve(account))
+    }
+  }
+  return new LoadAccountByEmailRepositoryStub()
+}
+
 describe('DbAuthentication UseCase', () => {
   test('Should call LoadAccountByEmailRepository with correct email', async () => {
-    class LoadAccountByEmailRepositoryStub implements LoadAccountByEmailRepository {
-      async load (email: string): Promise<AccountModel> {
-        const account: AccountModel = makeFakeAccount()
-        return new Promise(resolve => resolve(account))
-      }
-    }
-    const loadAccountByEmailRepositoryStub = new LoadAccountByEmailRepositoryStub()
+    const loadAccountByEmailRepositoryStub = makeLoadAccountByEmailRepository()
     const sut = new DbAuthentication(loadAccountByEmailRepositoryStub)
     const loadSpy = jest.spyOn(loadAccountByEmailRepositoryStub, 'load')
     const { email, password } = makeFakeAccount()
