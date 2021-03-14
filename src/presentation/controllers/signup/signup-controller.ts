@@ -2,10 +2,10 @@ import { badRequest, ok, serverError } from '../../helpers/http/http-helper'
 import { HttpRequest, HttpResponse, Controller, AddAccount, Validation } from './signup-controller-protocols'
 
 export class SignUpController implements Controller {
-  private readonly addAccount: AddAccount
-  private readonly validation: Validation
-
-  constructor (addAccount: AddAccount, validation: Validation) {
+  constructor (
+    private readonly addAccount: AddAccount,
+    private readonly validation: Validation
+  ) {
     this.addAccount = addAccount
     this.validation = validation
   }

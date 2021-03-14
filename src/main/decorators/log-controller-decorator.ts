@@ -3,10 +3,10 @@ import { HttpRequest, HttpResponse } from '../../presentation/protocols/http'
 import { LogErrorRepository } from '../../data/protocols/db/log/log-error-repository'
 
 export class LogControllerDecorator implements Controller {
-  private readonly controller: Controller
-  private readonly logErrorRepository: LogErrorRepository
-
-  constructor (controller: Controller, logErrorRepository: LogErrorRepository) {
+  constructor (
+    private readonly controller: Controller,
+    private readonly logErrorRepository: LogErrorRepository
+  ) {
     this.controller = controller
     this.logErrorRepository = logErrorRepository
   }
