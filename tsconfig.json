@@ -5,6 +5,7 @@
     "target": "es2019",
     "esModuleInterop": true,
     "allowJs": true,
-    "strict": true
+    "strict": true,
+    "strictNullChecks": false
   }
 }
