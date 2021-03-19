@@ -58,6 +58,6 @@
     "validator": "^13.5.2"
   },
   "engines": {
-    "node": "15.x"
+    "node": "15.12.0"
   }
 }
