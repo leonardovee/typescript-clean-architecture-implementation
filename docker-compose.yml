@@ -9,9 +9,9 @@ services:
     ports:
       - "27017:27017"
   app:
-    container_name: app
+    container_name: app-container
     image: typescript-clean-architecture-implementation
-    build: ./Dockerfile
+    build: .
     restart: always
     volumes:
       - ./dist:/usr/src/typescript-clean-architecture-implementation/dist
