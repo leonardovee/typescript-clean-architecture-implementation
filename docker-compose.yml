@@ -15,8 +15,10 @@ services:
     restart: always
     volumes:
       - ./dist:/usr/src/typescript-clean-architecture-implementation/dist
+      - ./package.json:/usr/src/typescript-clean-architecture-implementation/package.json
     ports:
       - "5050:5050"
-    command: npm run start
+      - "9222:9222"
+    command: npm run debug
     links:
       - mongo
