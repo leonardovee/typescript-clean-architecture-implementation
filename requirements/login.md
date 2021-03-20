@@ -10,7 +10,7 @@
 6. ✅ **Update** the user with the new token
 7. ✅ Returns **200** with the token and username
 
-> ### Exceções
+> ### Exceptions
 
 1. ✅ Returns a **404** if the API don't exists
 2. ✅ Returns a **400** if no valid e-mail or password are provided
