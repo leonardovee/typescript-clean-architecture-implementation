@@ -1,7 +1,7 @@
-import { ok, serverError, badRequest, forbidden } from '../../helpers/http/http-helper'
-import { EmailAlreadyTakenError, MissingParamError, ServerError } from '../../errors'
+import { ok, serverError, badRequest, forbidden } from '../../../helpers/http/http-helper'
+import { EmailAlreadyTakenError, MissingParamError, ServerError } from '../../../errors'
 import { SignUpController } from './signup-controller'
-import { HttpRequest } from '../../protocols'
+import { HttpRequest } from '../../../protocols'
 import {
   AddAccount,
   AccountModel,
