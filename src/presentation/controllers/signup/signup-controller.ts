@@ -17,18 +17,14 @@ export class SignUpController implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const error = this.validation.validate(httpRequest.body)
-      if (error) {
-        return badRequest(error)
-      }
+      if (error) return badRequest(error)
       const { name, email, password } = httpRequest.body
       const account = await this.addAccount.add({
         name,
         email,
         password
       })
-      if (!account) {
-        return forbidden(new EmailAlreadyTakenError())
-      }
+      if (!account) return forbidden(new EmailAlreadyTakenError())
       const accessToken = await this.authentication.auth({
         email,
         password
