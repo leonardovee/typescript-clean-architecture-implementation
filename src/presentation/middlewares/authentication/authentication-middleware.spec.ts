@@ -1,12 +1,58 @@
+import { LoadAccountByToken } from '../../../domain/usecases/authentication/load-account-by-token'
 import { AuthenticationMiddleware } from './authentication-middleware'
+import { AccountModel } from '../../../domain/models/account'
 import { forbidden } from '../../helpers/http/http-helper'
-import { HttpResponse } from '../../protocols/http'
+import { HttpRequest, HttpResponse } from '../../protocols/http'
 import { AccessDeniedError } from '../../errors'
+
+const makeFakeAccount = (): AccountModel => {
+  return {
+    id: 'valid_id',
+    name: 'valid_name',
+    email: 'valid_email@mail.com',
+    password: 'hashed_password'
+  }
+}
+
+const makeLoadAccountByTokenStub = (): LoadAccountByToken => {
+  class LoadAccountByTokenStub implements LoadAccountByToken {
+    async load (accessToken: string, role?: string): Promise<AccountModel> {
+      return new Promise(resolve => resolve(makeFakeAccount()))
+    }
+  }
+  return new LoadAccountByTokenStub()
+}
+
+interface SutTypes {
+  sut: AuthenticationMiddleware
+  loadAccountByTokenStub: LoadAccountByToken
+}
+
+const makeSut = (): SutTypes => {
+  const loadAccountByTokenStub = makeLoadAccountByTokenStub()
+  const sut: AuthenticationMiddleware = new AuthenticationMiddleware(loadAccountByTokenStub)
+  return {
+    sut,
+    loadAccountByTokenStub
+  }
+}
 
 describe('Authentication Middleware', () => {
   test('Should return 403 if no x-access-token exists in headers', async () => {
-    const sut: AuthenticationMiddleware = new AuthenticationMiddleware()
+    const { sut } = makeSut()
     const httpResponse: HttpResponse = await sut.handle({})
     expect(httpResponse).toEqual(forbidden(new AccessDeniedError()))
+  })
+
+  test('Should call LoadAccountByToken with correct access token', async () => {
+    const { sut, loadAccountByTokenStub } = makeSut()
+    const loadSpy = jest.spyOn(loadAccountByTokenStub, 'load')
+    const httpRequest: HttpRequest = {
+      headers: {
+        'x-access-token': 'any_token'
+      }
+    }
+    await sut.handle(httpRequest)
+    expect(loadSpy).toHaveBeenCalledWith(httpRequest.headers['x-access-token'])
   })
 })
