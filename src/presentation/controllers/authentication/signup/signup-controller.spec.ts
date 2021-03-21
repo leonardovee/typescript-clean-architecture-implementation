@@ -1,7 +1,7 @@
-import { ok, serverError, badRequest, forbidden } from '../../helpers/http/http-helper'
-import { EmailAlreadyTakenError, MissingParamError, ServerError } from '../../errors'
+import { ok, serverError, badRequest, forbidden } from '../../../helpers/http/http-helper'
+import { EmailAlreadyTakenError, MissingParamError, ServerError } from '../../../errors'
 import { SignUpController } from './signup-controller'
-import { HttpRequest } from '../../protocols'
+import { HttpRequest } from '../../../protocols'
 import {
   AddAccount,
   AccountModel,
@@ -102,7 +102,7 @@ describe('Sign Up Controller', () => {
   test('Should return access token if valid data is provided', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(ok({ accessToken: 'any_token'}))
+    expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }))
   })
 
   test('Should call Validation with correct values', async () => {
