@@ -13,7 +13,7 @@
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "jest --passWithNoTests --silent --noStackTrace --runInBand --watch -c jest-unit-config.js",
-    "test:integration": "jest --passWithNoTests --silent --noStackTrace --runInBand --watch -c jest-integration-config.js",
+    "test:integration": "jest --passWithNoTests --noStackTrace --runInBand --watch -c jest-integration-config.js",
     "test:staged": "jest --passWithNoTests --silent --noStackTrace --runInBand --findRelatedTests",
     "test:ci": "jest --passWithNoTests --silent --noStackTrace --runInBand --coverage"
   },
