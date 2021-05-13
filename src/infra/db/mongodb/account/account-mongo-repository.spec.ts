@@ -79,7 +79,7 @@ describe('Account Mongo Repository', () => {
   })
 
   describe('loadByToken()', () => {
-    test('Should return an account on loadByToken without load success', async () => {
+    test('Should return an account on loadByToken without role', async () => {
       const sut = makeSut()
       await accountCollection.insertOne({
         name: 'any_name',
@@ -95,7 +95,7 @@ describe('Account Mongo Repository', () => {
       expect(account.password).toBe('any_password')
     })
 
-    test('Should return an account on loadByToken with load success', async () => {
+    test('Should return an account on loadByToken with role', async () => {
       const sut = makeSut()
       await accountCollection.insertOne({
         name: 'any_name',
