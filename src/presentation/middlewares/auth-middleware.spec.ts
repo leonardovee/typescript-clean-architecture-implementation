@@ -1,12 +1,12 @@
-import { forbidden, ok, serverError } from '../../helpers/http/http-helper'
-import { AuthenticationMiddleware } from './authentication-middleware'
-import { AccessDeniedError } from '../../errors'
+import { forbidden, ok, serverError } from '../helpers/http/http-helper'
+import { AuthMiddleware } from './auth-middleware'
+import { AccessDeniedError } from '../errors'
 import {
   HttpRequest,
   HttpResponse,
   AccountModel,
   LoadAccountByToken
-} from './authentication-middleware-protocols'
+} from './auth-middleware-protocols'
 
 const makeFakeRequest = (): HttpRequest => {
   return {
@@ -36,13 +36,13 @@ const makeLoadAccountByTokenStub = (): LoadAccountByToken => {
 }
 
 interface SutTypes {
-  sut: AuthenticationMiddleware
+  sut: AuthMiddleware
   loadAccountByTokenStub: LoadAccountByToken
 }
 
 const makeSut = (role?: string): SutTypes => {
   const loadAccountByTokenStub = makeLoadAccountByTokenStub()
-  const sut: AuthenticationMiddleware = new AuthenticationMiddleware(loadAccountByTokenStub, role)
+  const sut: AuthMiddleware = new AuthMiddleware(loadAccountByTokenStub, role)
   return {
     sut,
     loadAccountByTokenStub
